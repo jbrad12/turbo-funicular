@@ -34,6 +34,8 @@ const render = require("./lib/htmlRenderer");
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
+
+//Asks user which type of employee to create or calls the output function
 function team() {
     inquirer.prompt([
         {
@@ -54,9 +56,7 @@ function team() {
         if (data.type === "Create my team") {output()}
     });
 };
-
-
-
+//Prompts user for manager details
 function manager() {
     inquirer.prompt([
     {
@@ -87,7 +87,7 @@ function manager() {
 });
 
 }
-
+//Prompts user for engineer details
 function engineer() {
     inquirer.prompt([
         {
@@ -116,7 +116,7 @@ function engineer() {
         team();
     });
 };
-
+//Prompts user for intern details
 function intern() {
     inquirer.prompt([
         {
@@ -147,17 +147,11 @@ function intern() {
     });
 };
 
-
+//empty array for containing employee info
 var employees = []
 
-//Test
-
- 
-
-
-
-
-  function output() {
+//Calls render function on employees array and generates the output file
+function output() {
 
     fs.writeFile(outputPath, render(employees), (err) =>
       err ? console.log(err) : console.log('Success!')
@@ -165,8 +159,8 @@ var employees = []
 
   }
     
-
-team()
+//Starts app
+team();
     
 
 
