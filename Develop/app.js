@@ -33,3 +33,143 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+function team() {
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "type",
+            message: "Which type of member would you like to add?",
+            choices: [
+                "Manager",
+                "Engineer",
+                "Intern",
+                "Create my team"
+            ]
+        }
+    ]).then(function(data){
+        if (data.type === "Engineer"){engineer()}
+        if (data.type === "Manager"){manager()}
+        if (data.type === "Intern"){intern()}
+        if (data.type === "Create my team") {output()}
+    });
+};
+
+
+
+function manager() {
+    inquirer.prompt([
+    {
+        type: "input",
+        name: "name",
+        message: "What is the manager's name?"
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "What is the manager's ID?"
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "What is the manager's email?"
+    },
+    {
+        type: "input",
+        name: "office",
+        message: "What is the manager's office number?"
+    }
+])  .then(function(data){
+    const manager = new Manager(data.name, data.id, data.email, data.office);
+    employees.push(manager);
+   
+    team();
+});
+
+}
+
+function engineer() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name:"name",
+            message: "What is the engineer's name?"
+        },
+        {
+            type: "input",
+            name:"id",
+            message: "What is the engineer's ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is the engineer's email?"
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "What is the engineer's GitHub username?"
+        }
+    ]). then(function(data){
+        const engineer = new Engineer(data.name, data.id, data.email, data.github);
+        employees.push(engineer);
+        team();
+    });
+};
+
+function intern() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is the intern's name?"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What is the intern's ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is the intern's email?"
+        },
+        {
+            type: "input",
+            name: "school",
+            message: "What is the intern's school?"
+        }
+    ]). then(function(data){
+        const intern = new Intern(data.name, data.id, data.email, data.school);
+        employees.push(intern);
+        
+        team();
+    });
+};
+
+
+var employees = []
+
+//Test
+
+ 
+
+
+
+
+  function output() {
+
+    fs.writeFile(outputPath, render(employees), (err) =>
+      err ? console.log(err) : console.log('Success!')
+    );
+
+  }
+    
+
+team()
+    
+
+
+
+ 
+

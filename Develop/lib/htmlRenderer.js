@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 
+
 const templatesDir = path.resolve(__dirname, "../templates");
 
 const render = employees => {
@@ -50,6 +51,7 @@ const renderIntern = intern => {
   template = replacePlaceholders(template, "email", intern.getEmail());
   template = replacePlaceholders(template, "id", intern.getId());
   template = replacePlaceholders(template, "school", intern.getSchool());
+  console.log(intern.getSchool())
   return template;
 };
 
